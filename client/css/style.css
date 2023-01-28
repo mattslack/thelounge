@@ -595,6 +595,8 @@ p {
 #viewport {
 	display: flex;
 	height: 100%;
+	margin-top: env(safe-area-inset-top);
+	position: relative;
 }
 
 #form button,
@@ -669,12 +671,13 @@ p {
 }
 
 #sidebar {
+	color: #b7c5d1; /* same as .channel-list-item color */
 	display: none;
 	flex-direction: column;
-	width: 220px;
 	max-height: 100%;
+	padding-bottom: env(safe-area-inset-bottom);
+	width: 220px;
 	will-change: transform;
-	color: #b7c5d1; /* same as .channel-list-item color */
 }
 
 #viewport.menu-open #sidebar {
@@ -2205,16 +2208,23 @@ part/quit messages where we don't load previews (adds a blank line otherwise) */
 }
 
 #form {
-	flex: 0 0 auto;
+	align-items: flex-end;
+	background: white;
 	border: 0;
 	border-top: 1px solid #e7e7e7;
 	border-radius: 0;
-	margin: 0;
-	padding: 6px;
-	background: white;
 	display: flex;
-	align-items: flex-end;
+	flex: 0 0 auto;
+	padding: 6px;
 	position: relative;
+}
+@supports (#form:has(#input:focus)) {
+	#form {
+		margin-bottom: 0 0 env(safe-area-inset-bottom);
+	}
+	#form:has(#input:focus) {
+		margin-bottom: 0;
+	}
 }
 
 #user-visible-error {
